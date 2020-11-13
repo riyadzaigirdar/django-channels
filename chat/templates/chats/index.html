@@ -1,0 +1,50 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chat Rooms</title>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0"
+      nonce="SkaAVPz2"
+    ></script>
+
+    What chat room would you like to enter {{ request.user.username}}?<br />
+    <input id="room-name-input" type="text" size="100" /><br />
+    <input id="room-name-submit" type="button" value="Enter" />
+
+    <div
+      class="fb-share-button"
+      data-href="https://dev.kalke.co/job-details/8"
+      data-layout="button_count"
+      data-size="large"
+    >
+      <a
+        target="_blank"
+        href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdev.kalke.co%2Fjob-details%2F8&amp;src=sdkpreparse"
+        class="fb-xfbml-parse-ignore"
+        >Share</a
+      >
+    </div>
+    <script>
+      document.querySelector("#room-name-input").focus();
+      document.querySelector("#room-name-input").onkeyup = function (e) {
+        if (e.keyCode === 13) {
+          // enter, return
+          document.querySelector("#room-name-submit").click();
+        }
+      };
+
+      document.querySelector("#room-name-submit").onclick = function (e) {
+        var roomName = document.querySelector("#room-name-input").value;
+        window.location.pathname = "/chat/" + roomName + "/";
+      };
+    </script>
+  </body>
+</html>
